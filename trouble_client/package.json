@@ -1,5 +1,5 @@
 {
-  "name": "trouble-client",
+  "name": "trouble_client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
