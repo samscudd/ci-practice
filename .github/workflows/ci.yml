@@ -7,7 +7,7 @@ jobs:
 
     runs-on: ubuntu-latest
     env: 
-      client-directory: ./trouble_pipeline_test
+      client-directory: ./trouble_client
       CI: true
 
     strategy:
