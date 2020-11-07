@@ -1,0 +1,25 @@
+{
+  "name": "trouble_game",
+  "version": "1.0.0",
+  "description": "Trouble Board Game for CSE 210 at UCSD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Baby-Zoomers/trouble_game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Baby-Zoomers/trouble_game/issues"
+  },
+  "homepage": "https://github.com/Baby-Zoomers/trouble_game#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
