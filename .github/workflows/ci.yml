@@ -3,7 +3,7 @@ name: Node.js CI
 on: [pull_request]
 
 jobs:
-  build:
+  frontend-tests:
 
     runs-on: ubuntu-latest
     env: 
@@ -26,3 +26,24 @@ jobs:
       working-directory: ${{env.client-directory}}
     - run: npm test
       working-directory: ${{env.client-directory}}
+      
+  backend-tests:
+      runs-on: ubuntu-latest
+      env: 
+        server-directory: ./
+        CI: true
+
+      strategy:
+        matrix:
+          node-version: [14.x]
+
+      steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }} 
+      - run: npm install
+        working-directory: ${{env.server-directory}}
+      - run: npm test
+        working-directory: ${{env.server-directory}}
