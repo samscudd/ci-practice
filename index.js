@@ -6,10 +6,14 @@ const app = express();
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'trouble_client/build')));
 
+function get_hello(){
+    return "hello world";
+}
+
 // Put all API endpoints under '/api'
 app.get('/api/hello', (req, res) => {
 
-  const hello_text = {'text': 'hello world'}
+  const hello_text = {'text': get_hello()}
 
   res.json(hello_text);
 
@@ -23,6 +27,8 @@ app.get('*', (req, res) => {
 });
 
 const port = process.env.PORT || 5000;
-app.listen(port);
+const server = app.listen(port);
 
 console.log(`Trouble API listening on ${port}`);
+
+module.exports = server
