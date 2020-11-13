@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Board from './Board'
 
 class App extends Component {
   // Initialize state
@@ -23,7 +23,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+        <Board width={1000} height={1000}/>
           <p>
             {this.state.msg}
           </p>
