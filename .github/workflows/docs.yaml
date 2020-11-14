@@ -1,0 +1,20 @@
+name: Documentation
+on: pull_request
+jobs:
+    resources:
+        name: Update backend documentation
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+
+            - uses: actions/setup-node@v1
+
+            - name: Generate Documentation
+              run: npm run doc
+
+            - name: Update resources
+              uses: test-room-7/action-update-file@v1
+              with:
+                  file-path: docs/*
+                  commit-msg: Update documentation
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
