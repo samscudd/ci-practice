@@ -17,10 +17,9 @@ jobs:
               
             - uses: nelonoel/branch-name@v1
 
-            - name: Update resources
-              uses: test-room-7/action-update-file@v1
+            - name: Update documentation
+              uses: EndBug/add-and-commit@v5
               with:
-                  file-path: docs/*
-                  branch:  ${BRANCH_NAME}
+                  add: "docs/*"
                   commit-msg: Update documentation
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
