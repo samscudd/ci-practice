@@ -1,5 +1,5 @@
 name: Documentation
-on: pull_request
+on: push
 jobs:
     resources:
         name: Update backend documentation
