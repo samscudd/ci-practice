@@ -22,4 +22,5 @@ jobs:
               with:
                   add: "docs/*"
                   commit-msg: Update documentation
+              env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
