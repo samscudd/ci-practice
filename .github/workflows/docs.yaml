@@ -9,6 +9,9 @@ jobs:
 
             - uses: actions/setup-node@v1
 
+            - name: Install jsdoc
+              run: npm install
+
             - name: Generate Documentation
               run: npm run doc
 
