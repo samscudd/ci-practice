@@ -22,6 +22,6 @@ jobs:
               uses: EndBug/add-and-commit@v5
               with:
                   add: "docs/*"
-                  commit-msg: Update documentation
+#                   message: Update documentation
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
