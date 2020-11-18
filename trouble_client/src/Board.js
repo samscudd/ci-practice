@@ -244,7 +244,7 @@ class Board extends Component {
         <ellipse id="ellipse3217" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
         <ellipse id="ellipse3219" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ffc107" strokeWidth="6.7323"/>
       </g>
-      <g id="g3768" transform="rotate(45 -240.59 688.85)">
+      <g id="space48" transform="rotate(45 -240.59 688.85)">
         <circle id="circle3223" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
         <ellipse id="ellipse3225" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
         <ellipse id="ellipse3227" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
