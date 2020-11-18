@@ -6,7 +6,9 @@ import './App.css';
  * @extends Component
  */
 class App extends Component {
-  /** @private Internal state - message shown to user */
+  /** Internal state - message shown to user 
+   * @private
+  */
   state = { msg: 'Waiting for backend' }
 
   componentDidMount() {
