@@ -2,15 +2,19 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+/** Main React App component
+ * @extends Component
+ */
 class App extends Component {
-  // Initialize state
+  /** @private Internal state - message shown to user */
   state = { msg: 'Waiting for backend' }
 
-  // Fetch passwords after first mount
   componentDidMount() {
+    // Fetch passwords after first mount
     this.getHello();
   }
 
+  /** Get Hello World text from backend */
   getHello = () => {
     // Get the passwords and store them in state
     fetch('/api/hello')
@@ -18,7 +22,7 @@ class App extends Component {
       .then(text => this.setState({ msg: text.text }));
   }
 
-
+  /** Render the app */
    render() {
     return (
       <div className="App">

@@ -12,8 +12,11 @@ jobs:
             - name: Install jsdoc
               run: npm install
 
-            - name: Generate Documentation
-              run: npm run doc
+            - name: Generate Server Documentation
+              run: npm run doc-server
+
+            - name: Generate Client Documentation
+              run: npm run doc-client
               
             - uses: nelonoel/branch-name@v1
 
