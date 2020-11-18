@@ -1,0 +1,27 @@
+name: Documentation
+on: push
+jobs:
+    resources:
+        name: Update Documentation
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+
+            - uses: actions/setup-node@v1
+
+            - name: Install jsdoc
+              run: npm install
+
+            - name: Generate Server Documentation
+              run: npm run doc-server
+
+            - name: Generate Client Documentation
+              run: npm run doc-client
+              
+            - name: Add Commit
+              uses: EndBug/add-and-commit@v5
+              with:
+                  add: "docs/*"
+#                   message: Update documentation
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

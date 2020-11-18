@@ -6,11 +6,23 @@ const app = express();
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'trouble_client/build')));
 
+/**
+ * Returns the string "hello world"
+ * @returns {string} "hello world"
+ */
 function get_hello(){
     return "hello world";
 }
 
-// Put all API endpoints under '/api'
+/**
+ * Get Hello World Message
+ *
+ * @name Hello World
+ * @path {GET} /api/hello
+ * @response {String} "hello world" message
+ * @code {200} if the request is successful
+ * @code {500} if server dies
+ */
 app.get('/api/hello', (req, res) => {
 
   const hello_text = {'text': get_hello()}
