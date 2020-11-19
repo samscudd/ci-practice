@@ -16,6 +16,19 @@
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "port": 9229
+          },
+          {
+            "name": "Debug React Tests (frontend)",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "${workspaceRoot}/trouble_client/node_modules/.bin/react-scripts",
+            "args": ["test", "--runInBand", "--no-cache", "--watchAll=false"],
+            "cwd": "${workspaceRoot}/trouble_client",
+            "protocol": "inspector",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "env": { "CI": "true" },
+            "disableOptimisticBPs": true
           }
     ]
 }
