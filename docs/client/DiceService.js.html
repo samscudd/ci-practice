@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: DiceService.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,44 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: DiceService.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import { BehaviorSubject } from 'rxjs'
 
+class DiceService{
+    /** Observable Dice Roll value. Subscribe to add a callback for a new dice roll */
+    diceRoll = BehaviorSubject(0);
 
-    <h3> </h3>
+    rollDice(){
 
+    }
 
+    /** Roll result Handler. Called when a new roll result is received.
+     * @param roll {int} value that the player rolled.
+     */
+    handleRollResult(roll){
+        this.diceRoll.next(roll);
+    }
+}
 
+export const diceServiceInstance = DiceService();
 
+export const state = {
+    diceServiceInstance
+}
 
-
-
-
-
-
-    
-
-
-
-
-
+export default DiceService;
+export const DiceServiceContext = React.createContext(state)</code></pre>
+        </article>
+    </section>
 
 
 
