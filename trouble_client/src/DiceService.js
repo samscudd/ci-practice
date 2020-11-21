@@ -16,12 +16,14 @@ class DiceService{
         this.diceRoll.next(roll);
     }
 }
+// diceServiceInstance = useContext(DiceServiceContext)
+
 
 export const diceServiceInstance = DiceService();
 
-export const state = {
-    diceServiceInstance
-}
+// export const state = {
+//     diceServiceInstance
+// }
 
 export default DiceService;
-export const DiceServiceContext = React.createContext(state)
+export const DiceServiceContext = React.createContext(diceServiceInstance)
