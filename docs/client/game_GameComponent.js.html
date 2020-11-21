@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: App.js</title>
+    <title>JSDoc: Source: game/GameComponent.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: App.js</h1>
+    <h1 class="page-title">Source: game/GameComponent.js</h1>
 
     
 
@@ -27,29 +27,38 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
-import './App.css';
-import GameComponent from './game/GameComponent';
+import Board from '../Board';
+import BoardContainer from './BoardContainer';
+import CompletionContainer from './CompletionContainer';
+import CompletionWindow from './CompletionWindow';
+import DiceContainer from './DiceContainer';
+import DiceWindow from './DiceWindow';
+import SocketManager from './SocketManager'
+import TurnContainer from './TurnContainer';
+import TurnStatusIndicator from './TurnStatusIndicator';
 
-/** Main React App component
- * @extends Component
- */
-class App extends Component {
-
-  /** Render the app */
-   render() {
-    return (
-      &lt;div className="App">
-        &lt;header className="App-header">
-          &lt;GameComponent>&lt;/GameComponent>
-        &lt;/header>
-      &lt;/div>
-    );
-  }
+/** Encapsulating component for the Game View  */
+class GameComponent extends Component {
+    render() {
+        return (
+        &lt;SocketManager>
+            &lt;TurnContainer>
+                &lt;DiceContainer>
+                    &lt;BoardContainer>
+                        &lt;Board>&lt;/Board>
+                    &lt;/BoardContainer>
+                    &lt;DiceWindow>&lt;/DiceWindow>
+                &lt;/DiceContainer>
+                &lt;TurnStatusIndicator>&lt;/TurnStatusIndicator>
+                &lt;CompletionContainer>
+                    &lt;CompletionWindow>&lt;/CompletionWindow>
+                &lt;/CompletionContainer>
+            &lt;/TurnContainer>
+        &lt;/SocketManager>);
+      }
 }
 
-
-export default App;
-</code></pre>
+export default GameComponent;</code></pre>
         </article>
     </section>
 
