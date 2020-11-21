@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
  
 class Board extends Component {
+
    render() {
     return (
 <svg id="SVGRoot" width="800px" height="800px" version="1.1" viewBox="0 0 800 800">
