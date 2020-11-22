@@ -5,7 +5,7 @@ import { Component } from 'react';
 class TurnStatusIndicator extends Component {
     render() {
         return (
-        <div bg-color="green">Player 1's turn</div>
+        <div bg-color="green">{this.props.player}'s turn</div>
         );
       }
 }

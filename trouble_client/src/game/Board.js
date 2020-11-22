@@ -4,7 +4,7 @@ class Board extends Component {
 
    render() {
     return (
-<svg id="SVGRoot" width="800px" height="800px" version="1.1" viewBox="0 0 800 800">
+<svg id="SVGRoot" width="800px" height="800px" version="1.1" viewBox="0 0 800 800">  
   <g id="layer1">
     <rect id="rect36" x="50" y="50" width="700" height="700" fill="#fff" fillRule="evenodd" stroke="#000" strokeWidth="2"/>
     <circle id="path912-2" cx="400" cy="400" r="314.03" fill="none" opacity=".998" stroke="#d0e0f2" strokeWidth="50"/>
