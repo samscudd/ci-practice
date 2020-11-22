@@ -19,7 +19,6 @@ class GameComponent extends Component {
                     <BoardContainer>
                         <Board></Board>
                     </BoardContainer>
-                    <DiceWindow></DiceWindow>
                 </DiceContainer>
                 <TurnStatusIndicator></TurnStatusIndicator>
                 <CompletionContainer>
