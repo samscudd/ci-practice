@@ -13,6 +13,7 @@ jobs:
             - uses: actions/setup-node@v1
 
             - name: Install jsdoc
+              working-directory: ./trouble_server
               run: npm install
 
             - name: Generate Server Documentation
