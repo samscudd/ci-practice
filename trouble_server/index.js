@@ -2,9 +2,11 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'trouble_client/build')));
+app.use(express.static(path.join(__dirname, '../trouble_client/build')));
 
 /**
  * Returns the string "hello world"
@@ -39,8 +41,16 @@ app.get('*', (req, res) => {
 });
 
 const port = process.env.PORT || 5000;
-const server = app.listen(port);
+// const server = app.listen(port);
 
 console.log(`Trouble API listening on ${port}`);
 
-module.exports = server
+io.on('connection', function(socket){
+  socket.on('rollResult', () => socket.emit('rollResult', 1))
+});
+
+http.listen(port, function(){
+  console.log('listening on *:' + port);
+});
+
+// module.exports = server
