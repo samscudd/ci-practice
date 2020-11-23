@@ -1,12 +1,15 @@
 import { Component } from 'react';
+import SocketContext from './socket_context/context';
 
 
 /** UI component to prompt the user to roll the dice and then show the result*/
 class DiceWindow extends Component {
 
+  static contextType = SocketContext;
+
     render() {
         return (
-        <div bg-color="#bbbbbb" onClick={this.props.handleDiceClick}>lastRoll was a {this.props.roll}</div>
+        <div bg-color="#bbbbbb" onClick={this.props.handleDiceClick}>lastRoll was a {this.context.rollResult}</div>
         );
       }
 

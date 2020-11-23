@@ -46,7 +46,11 @@ const port = process.env.PORT || 5000;
 console.log(`Trouble API listening on ${port}`);
 
 io.on('connection', function(socket){
-  socket.on('rollResult', () => socket.emit('rollResult', 1))
+  console.log("connection established");
+  socket.on('rollDice', () => {
+    console.log("rolling reuslt: 1");
+    socket.emit('rollResult', 1);
+  })
 });
 
 http.listen(port, function(){
