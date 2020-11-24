@@ -1,7 +1,9 @@
 import { Component } from 'react';
-import TroubleColors from '../Colors';
+import SocketContext from './socket_context/context';
  
 class Board extends Component {
+  static contextType = SocketContext;
+  
   spaceParams = {
     0: {cx: 85.97, cy: 400},  // Space 0
     1: {cx: 93.69, cy: 330.05},  // Space 1
@@ -63,6 +65,7 @@ class Board extends Component {
     57: {cx: 253.879, cy: 544.449},  // Space 57
     58: {cx: 291.911, cy: 506.417},  // Space 58
     59: {cx: 329.943, cy: 468.385},  // Space 59
+    numSpaces: 60
   }
   ringParams = {
     unoccupied: {r: 12.632, stroke: "#000000", strokeWidth: 14.737},
@@ -71,11 +74,11 @@ class Board extends Component {
   }
   
   /** Render an individual space
-   * @param spaceState {SpaceState} object representing the state of the space
    * @param spaceNumber {int} space number to render
+   * @param spaceState {SpaceState} object representing the state of the space
    * @returns JSX code necessary to render in the SVG
   */
-  renderSpace(spaceState, spaceNumber){
+  renderSpace(spaceNumber, spaceState){
     const params = this.spaceParams[spaceNumber];
     let spaceBody;
     if (spaceState.occupied){
@@ -94,10 +97,6 @@ class Board extends Component {
 
 
    render() {
-    const l1 = [];
-    for(var i = 0;i<60;i++){
-      l1.push(i);
-    }
     return (
 <svg id="SVGRoot" width="800px" height="800px" version="1.1" viewBox="0 0 800 800">  
   <g id="layer1">
@@ -162,7 +161,8 @@ class Board extends Component {
       <path id="path2219" d="m400 85.97v628.06" stroke="#000" strokeWidth="1px"/>
       <path id="path2221" d="m714.03 400h-628.06" stroke="#000" strokeWidth="1px"/>
     </g>
-    {l1.map(spaceId =>{return this.renderSpace({occupied: false, highlighted: true, color:TroubleColors.greenLight}, spaceId);})}
+    {/* Render all the spaces */}
+    { Object.keys(this.context.boardState.spaces).map((spaceNum) => this.renderSpace(spaceNum, this.context.boardState.spaces[spaceNum])) }  
   </g>
   <g id="layer2">
     <g id="g925" transform="matrix(.46241 .46241 -.46241 .46241 400 30.074)">

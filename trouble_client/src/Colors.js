@@ -1,4 +1,5 @@
-const TroubleColors = {
+/** Colors used in the Trouble App */
+export const TroubleColors = {
     yellow: "#F2C94C",
     yellowLight: "#fffc7d",
     yellowDark: "#bc9914",
@@ -15,4 +16,10 @@ const TroubleColors = {
     blueGray: "#d0e0f2"
 }
 
-export default TroubleColors;
+/** Alias for the player colors */
+export const PlayerColors = {
+    red: TroubleColors.redLight,
+    yellow: TroubleColors.yellowLight,
+    blue: TroubleColors.blueLight,
+    green: TroubleColors.greenLight,
+}
