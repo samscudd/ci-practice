@@ -13,11 +13,11 @@ export const socketEvents = ({ setValue }) => {
     setValue(state => { return { ...state, currentPlayer }});
   });
 
-  socket.on('completedPlayer', ({ currentPlayer }) => {
+  socket.on('completedPlayer', ({ completedPlayer }) => {
     setValue(state => { return { ...state, completedPlayer }});
   });
 
-  socket.on('boardState', ({lastMove}) => {
+  socket.on('boardState', ({boardState}) => {
     setValue(state => { return { ...state, boardState }});
   });
 

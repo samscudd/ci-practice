@@ -1,8 +1,103 @@
 import { Component } from 'react';
+import TroubleColors from '../Colors';
  
 class Board extends Component {
+  spaceParams = {
+    0: {cx: 85.97, cy: 400},  // Space 0
+    1: {cx: 93.69, cy: 330.05},  // Space 1
+    2: {cx: 116.784, cy: 263.567},  // Space 2
+    3: {cx: 154.091, cy: 203.892},  // Space 3
+    4: {cx: 203.741, cy: 154.015},  // Space 4
+    5: {cx: 263.246, cy: 116.436},  // Space 5
+    6: {cx: 329.62, cy: 93.04},  // Space 6
+    7: {cx: 399.536, cy: 85},  // Space 7
+    8: {cx: 469.489, cy: 92.7196},  // Space 8
+    9: {cx: 535.97, cy: 115.811},  // Space 9
+    10: {cx: 595.645, cy: 153.117},  // Space 10
+    11: {cx: 645.524, cy: 202.767},  // Space 11
+    12: {cx: 683.104, cy: 262.27},  // Space 12
+    13: {cx: 706.5, cy: 328.645},  // Space 13
+    14: {cx: 714.542, cy: 398.56},  // Space 14
+    15: {cx: 706.823, cy: 468.514},  // Space 15
+    16: {cx: 683.733, cy: 534.995},  // Space 16
+    17: {cx: 646.428, cy: 594.671},  // Space 17
+    18: {cx: 596.779, cy: 644.55},  // Space 18
+    19: {cx: 537.276, cy: 682.131},  // Space 19
+    20: {cx: 470.903, cy: 705.529},  // Space 20
+    21: {cx: 400.987, cy: 713.572},  // Space 21
+    22: {cx: 331.034, cy: 705.854},  // Space 22
+    23: {cx: 264.552, cy: 682.765},  // Space 23
+    24: {cx: 204.875, cy: 645.462},  // Space 24
+    25: {cx: 154.996, cy: 595.813},  // Space 25
+    26: {cx: 117.413, cy: 536.311},  // Space 26
+    27: {cx: 94.0141, cy: 469.938},  // Space 27
+    28: {cx: 80.5549, cy: 195.226},  // Space 28
+    29: {cx: 118.587, cy: 157.194},  // Space 29
+    30: {cx: 156.619, cy: 119.162},  // Space 30
+    31: {cx: 194.651, cy: 81.1302},  // Space 31
+    32: {cx: 604.172, cy: 80.5279},  // Space 32
+    33: {cx: 642.204, cy: 118.56},  // Space 33
+    34: {cx: 680.236, cy: 156.592},  // Space 34
+    35: {cx: 718.268, cy: 194.624},  // Space 35
+    36: {cx: 718.87, cy: 604.145},  // Space 36
+    37: {cx: 680.838, cy: 642.177},  // Space 37
+    38: {cx: 642.806, cy: 680.209},  // Space 38
+    39: {cx: 604.774, cy: 718.241},  // Space 39
+    40: {cx: 195.253, cy: 718.843},  // Space 40
+    41: {cx: 157.221, cy: 680.811},  // Space 41
+    42: {cx: 119.189, cy: 642.779},  // Space 42
+    43: {cx: 81.1572, cy: 604.747},  // Space 43
+    44: {cx: 215.848, cy: 215.847},  // Space 44
+    45: {cx: 253.88, cy: 253.879},  // Space 45
+    46: {cx: 291.912, cy: 291.911},  // Space 46
+    47: {cx: 329.944, cy: 329.943},  // Space 47
+    48: {cx: 582.482, cy: 215.848},  // Space 48
+    49: {cx: 544.45, cy: 253.88},  // Space 49
+    50: {cx: 506.418, cy: 291.912},  // Space 50
+    51: {cx: 468.386, cy: 329.944},  // Space 51
+    52: {cx: 582.481, cy: 582.482},  // Space 52
+    53: {cx: 544.449, cy: 544.45},  // Space 53
+    54: {cx: 506.417, cy: 506.418},  // Space 54
+    55: {cx: 468.385, cy: 468.386},  // Space 55
+    56: {cx: 215.847, cy: 582.481},  // Space 56
+    57: {cx: 253.879, cy: 544.449},  // Space 57
+    58: {cx: 291.911, cy: 506.417},  // Space 58
+    59: {cx: 329.943, cy: 468.385},  // Space 59
+  }
+  ringParams = {
+    unoccupied: {r: 12.632, stroke: "#000000", strokeWidth: 14.737},
+    occupied: {r: 14.211, stroke: "#ffffff", strokeWidth: 16.579},
+    highlight: {r: 19.134, stroke: "#ff9800", strokeWidth: 6.7323},
+  }
+  
+  /** Render an individual space
+   * @param spaceState {SpaceState} object representing the state of the space
+   * @param spaceNumber {int} space number to render
+   * @returns JSX code necessary to render in the SVG
+  */
+  renderSpace(spaceState, spaceNumber){
+    const params = this.spaceParams[spaceNumber];
+    let spaceBody;
+    if (spaceState.occupied){
+      spaceBody = <circle class="occupied_ring" cx={params.cx} cy={params.cy} r={this.ringParams.occupied.r} stroke={spaceState.color} strokeWidth={this.ringParams.occupied.strokeWidth} />;
+    } else {
+      spaceBody = <circle class="unoccupied_ring" cx={params.cx} cy={params.cy} r={this.ringParams.unoccupied.r}  stroke={this.ringParams.unoccupied.stroke} strokeWidth={this.ringParams.unoccupied.strokeWidth} />;
+    }
+
+    return(
+      <g id={"space" + spaceNumber.toString()}>
+        {spaceBody}
+        { spaceState.highlighted && <circle class="highlight_ring" cx={params.cx} cy={params.cy} r={this.ringParams.highlight.r} stroke={this.ringParams.highlight.stroke} strokeWidth={this.ringParams.highlight.strokeWidth}/> }
+      </g>
+    )
+  }  
+
 
    render() {
+    const l1 = [];
+    for(var i = 0;i<60;i++){
+      l1.push(i);
+    }
     return (
 <svg id="SVGRoot" width="800px" height="800px" version="1.1" viewBox="0 0 800 800">  
   <g id="layer1">
@@ -67,322 +162,7 @@ class Board extends Component {
       <path id="path2219" d="m400 85.97v628.06" stroke="#000" strokeWidth="1px"/>
       <path id="path2221" d="m714.03 400h-628.06" stroke="#000" strokeWidth="1px"/>
     </g>
-    <g id="space0">
-      <circle id="circle2910" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2912" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2914" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space1" transform="rotate(12.857 400.26 399.29)">
-      <circle id="circle2694" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2696" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2698" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space2" transform="rotate(25.714 400.26 399.29)">
-      <circle id="circle2702" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2704" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2706" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space3" transform="rotate(38.571 400.26 399.29)">
-      <circle id="circle2710" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2712" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2714" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space4" transform="rotate(51.428 400.26 399.29)">
-      <circle id="circle2718" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2720" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2722" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space5" transform="rotate(64.285 400.26 399.29)">
-      <circle id="circle2726" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2728" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2730" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space6" transform="rotate(77.142 400.26 399.29)">
-      <circle id="circle2734" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2736" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2738" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space7" transform="rotate(89.999 400.26 399.29)">
-      <circle id="circle2742" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2744" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2746" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space8" transform="rotate(102.86 400.26 399.29)">
-      <circle id="circle2750" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2752" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2754" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space9" transform="rotate(115.71 400.26 399.29)">
-      <circle id="circle2758" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2760" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2762" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space10" transform="rotate(128.57 400.26 399.29)">
-      <circle id="circle2766" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2768" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2770" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space11" transform="rotate(141.43 400.26 399.29)">
-      <circle id="circle2774" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2776" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2778" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ffc107" strokeWidth="6.7323"/>
-    </g>
-    <g id="space12" transform="rotate(154.28 400.26 399.29)">
-      <circle id="circle2782" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2784" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2786" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space13" transform="rotate(167.14 400.26 399.29)">
-      <circle id="circle2790" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2792" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2794" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space14" transform="rotate(180 400.26 399.29)">
-      <circle id="circle2798" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2800" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2802" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space15" transform="rotate(192.86 400.26 399.29)">
-      <circle id="circle2806" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2808" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2810" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space16" transform="rotate(205.71 400.26 399.29)">
-      <circle id="circle2814" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2816" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2818" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space17" transform="rotate(218.57 400.26 399.29)">
-      <circle id="circle2822" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2824" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2826" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space18" transform="rotate(231.43 400.26 399.29)">
-      <circle id="circle2830" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2832" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2834" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space19" transform="rotate(244.28 400.26 399.29)">
-      <circle id="circle2838" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2840" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2842" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space20" transform="rotate(257.14 400.26 399.29)">
-      <circle id="circle2846" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2848" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2850" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space21" transform="rotate(270 400.26 399.29)">
-      <circle id="circle2854" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2856" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2858" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space22" transform="rotate(-77.146 400.26 399.29)">
-      <circle id="circle2862" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2864" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2866" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space23" transform="rotate(-64.289 400.26 399.29)">
-      <circle id="circle2870" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2872" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2874" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space24" transform="rotate(-51.432 400.26 399.29)">
-      <circle id="circle2878" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2880" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2882" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space25" transform="rotate(-38.575 400.26 399.29)">
-      <circle id="circle2886" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2888" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2890" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space26" transform="rotate(-25.718 400.26 399.29)">
-      <circle id="circle2894" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2896" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2898" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="space27" transform="rotate(-12.861 400.26 399.29)">
-      <circle id="circle2902" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-      <ellipse id="ellipse2904" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-      <ellipse id="ellipse2906" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-    </g>
-    <g id="use3157" transform="rotate(180 205.21 465.68)">
-      <g id="space47" transform="rotate(45 -159.91 494.08)">
-        <circle id="circle3165" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3167" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3169" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space46" transform="rotate(45 -186.8 559)">
-        <circle id="circle3173" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3175" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3177" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space45" transform="rotate(45 -213.69 623.93)">
-        <circle id="circle3181" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3183" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3185" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space44" transform="rotate(45 -240.59 688.85)">
-        <circle id="circle3189" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3191" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3193" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-    </g>
-    <g id="use3159" transform="rotate(-90 138.69 271.73)">
-      <g id="space51" transform="rotate(45 -159.91 494.08)">
-        <circle id="circle3199" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3201" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3203" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space50" transform="rotate(45 -186.8 559)">
-        <circle id="circle3207" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3209" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3211" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space49" transform="rotate(45 -213.69 623.93)">
-        <circle id="circle3215" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3217" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3219" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ffc107" strokeWidth="6.7323"/>
-      </g>
-      <g id="space48" transform="rotate(45 -240.59 688.85)">
-        <circle id="circle3223" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3225" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3227" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-    </g>
-    <g id="use3161" transform="translate(387.91 -133.03)">
-      <g id="space55" transform="rotate(45 -159.91 494.08)">
-        <circle id="circle3233" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3235" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3237" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space54" transform="rotate(45 -186.8 559)">
-        <circle id="circle3241" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3243" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3245" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space53" transform="rotate(45 -213.69 623.93)">
-        <circle id="circle3249" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3251" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3253" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space52" transform="rotate(45 -240.59 688.85)">
-        <circle id="circle3257" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3259" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3261" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-    </g>
-    <g id="use3163" transform="rotate(90 271.73 659.64)">
-      <g id="space59" transform="rotate(45 -159.91 494.08)">
-        <circle id="circle3267" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3269" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3271" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space58" transform="rotate(45 -186.8 559)">
-        <circle id="circle3275" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3277" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3279" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space57" transform="rotate(45 -213.69 623.93)">
-        <circle id="circle3283" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3285" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3287" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space56" transform="rotate(45 -240.59 688.85)">
-        <circle id="circle3291" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3293" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3295" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-    </g>
-    <g id="use3303" transform="translate(.68078 3.3287)">
-      <g id="space43" transform="rotate(45 -159.91 494.08)">
-        <circle id="circle3529" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3531" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3533" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space42" transform="rotate(45 -186.8 559)">
-        <circle id="circle3537" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3539" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3541" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space41" transform="rotate(45 -213.69 623.93)">
-        <circle id="circle3545" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3547" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3549" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space40" transform="rotate(45 -240.59 688.85)">
-        <circle id="circle3553" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3555" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3557" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-    </g>
-    <g id="use3305" transform="rotate(90 397.71 398.36)">
-      <g id="space31" transform="rotate(45 -159.91 494.08)">
-        <circle id="circle3495" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3497" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3499" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space30" transform="rotate(45 -186.8 559)">
-        <circle id="circle3503" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3505" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3507" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space29" transform="rotate(45 -213.69 623.93)">
-        <circle id="circle3511" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3513" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3515" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space28" transform="rotate(45 -240.59 688.85)">
-        <circle id="circle3519" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3521" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3523" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-    </g>
-    <g id="use3307" transform="rotate(180 399.37 398.02)">
-      <g id="space35" transform="rotate(45 -159.91 494.08)">
-        <circle id="circle3461" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3463" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3465" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space34" transform="rotate(45 -186.8 559)">
-        <circle id="circle3469" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3471" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3473" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space33" transform="rotate(45 -213.69 623.93)">
-        <circle id="circle3477" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3479" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3481" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space32" transform="rotate(45 -240.59 688.85)">
-        <circle id="circle3485" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3487" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3489" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-    </g>
-    <g id="use3309" transform="rotate(-90 401.04 397.68)">
-      <g id="space39" transform="rotate(45 -159.91 494.08)">
-        <circle id="circle3427" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3429" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3431" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space38" transform="rotate(45 -186.8 559)">
-        <circle id="circle3435" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3437" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3439" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space37" transform="rotate(45 -213.69 623.93)">
-        <circle id="circle3443" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3445" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3447" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-      <g id="space36" transform="rotate(45 -240.59 688.85)">
-        <circle id="circle3451" class="unoccupied_ring" cx="85.97" cy="400" r="12.632" opacity=".998" stroke="#000" strokeWidth="14.737"/>
-        <ellipse id="ellipse3453" class="occupied_ring" cx="85.97" cy="400" rx="14.211" ry="14.211" display="none" opacity=".998" stroke="#fffc7d" strokeWidth="16.579"/>
-        <ellipse id="ellipse3455" class="suggestion_ring" cx="85.97" cy="400" rx="19.134" ry="19.134" display="none" opacity=".998" stroke="#ff9800" strokeWidth="6.7323"/>
-      </g>
-    </g>
+    {l1.map(spaceId =>{return this.renderSpace({occupied: false, highlighted: true, color:TroubleColors.greenLight}, spaceId);})}
   </g>
   <g id="layer2">
     <g id="g925" transform="matrix(.46241 .46241 -.46241 .46241 400 30.074)">

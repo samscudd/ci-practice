@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import SocketContext from './socket_context/context';
 
 
 /** UI component to display the current player's turn.*/
