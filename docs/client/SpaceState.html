@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: CompletionContainer</title>
+    <title>JSDoc: Class: SpaceState</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: CompletionContainer</h1>
+    <h1 class="page-title">Class: SpaceState</h1>
 
     
 
@@ -28,9 +28,10 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>CompletionContainer<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>SpaceState<span class="signature">(occupied, color, highlighted)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Completion (win/loss) management logic. Consumes completion messages and manages completed player state</div>
+            <div class="class-description">Simple class for representing the state of a board space. 
+Used primarily by Board.js</div>
         
     
 </header>
@@ -45,7 +46,7 @@
     
 
     
-    <h4 class="name" id="CompletionContainer"><span class="type-signature"></span>new CompletionContainer<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="SpaceState"><span class="type-signature"></span>new SpaceState<span class="signature">(occupied, color, highlighted)</span><span class="type-signature"></span></h4>
     
 
     
@@ -58,6 +59,101 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>occupied</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">True if space is occupied by a piece</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Color to render the occupied space</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>highlighted</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">if the space is highlighted</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -93,7 +189,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="game_CompletionContainer.js.html">game/CompletionContainer.js</a>, <a href="game_CompletionContainer.js.html#line5">line 5</a>
+        <a href="game_SpaceState.js.html">game/SpaceState.js</a>, <a href="game_SpaceState.js.html#line4">line 4</a>
     </li></ul></dd>
     
 
