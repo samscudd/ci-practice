@@ -41,9 +41,6 @@ app.get('*', (req, res) => {
 });
 
 const port = process.env.PORT || 5000;
-// const server = app.listen(port);
-
-console.log(`Trouble API listening on ${port}`);
 
 io.on('connection', function(socket){
   console.log("connection established");
@@ -53,8 +50,8 @@ io.on('connection', function(socket){
   })
 });
 
-http.listen(port, function(){
-  console.log('listening on *:' + port);
+server = http.listen(port, function(){
+  console.log('Trouble API listening on *:' + port);
 });
 
-// module.exports = server
+module.exports = server
