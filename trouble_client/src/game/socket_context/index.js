@@ -77,7 +77,7 @@ const SocketProvider = (props) => {
       gameOver: false,
     });
 
-useEffect(() => initSockets({ setValue }), [initSockets]);
+useEffect(() => initSockets({ setValue }), []);
 // Note, we are passing setValue ^ to initSockets
 return(
     <SocketContext.Provider value={ value }>
