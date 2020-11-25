@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: App.js</title>
+    <title>JSDoc: Source: Colors.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: App.js</h1>
+    <h1 class="page-title">Source: Colors.js</h1>
 
     
 
@@ -26,29 +26,31 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
-import './App.css';
-import GameComponent from './game/GameComponent';
-
-/** Main React App component
- * @extends Component
- */
-class App extends Component {
-
-  /** Render the app */
-   render() {
-    return (
-      &lt;div className="App">
-        &lt;header className="App-header" data-testid="App-header">
-          &lt;GameComponent>&lt;/GameComponent>
-        &lt;/header>
-      &lt;/div>
-    );
-  }
+            <pre class="prettyprint source linenums"><code>/** Colors used in the Trouble App */
+export const TroubleColors = {
+    yellow: "#F2C94C",
+    yellowLight: "#fffc7d",
+    yellowDark: "#bc9914",
+    red: "#EB5757",
+    redLight: "#ff8984",
+    redDark: "#b3202e",
+    green: "#27AE60",
+    greenLight: "#64e18e",
+    greenDark: "#007d34",
+    blue: "#2f80ed",
+    blueLight: "#73afff",
+    blueDark: "#0055ba",
+    ringHighlight: "#FF9800",
+    blueGray: "#d0e0f2"
 }
 
-
-export default App;
+/** Alias for the player colors */
+export const PlayerColors = {
+    red: TroubleColors.redLight,
+    yellow: TroubleColors.yellowLight,
+    blue: TroubleColors.blueLight,
+    green: TroubleColors.greenLight,
+}
 </code></pre>
         </article>
     </section>

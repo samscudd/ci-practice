@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: App.js</title>
+    <title>JSDoc: Source: game/TurnContainer.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: App.js</h1>
+    <h1 class="page-title">Source: game/TurnContainer.js</h1>
 
     
 
@@ -26,30 +26,26 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
-import './App.css';
-import GameComponent from './game/GameComponent';
+            <pre class="prettyprint source linenums"><code>import { Component } from 'react';
+import TurnStatusIndicator from './TurnStatusIndicator';
 
-/** Main React App component
- * @extends Component
- */
-class App extends Component {
 
-  /** Render the app */
-   render() {
-    return (
-      &lt;div className="App">
-        &lt;header className="App-header" data-testid="App-header">
-          &lt;GameComponent>&lt;/GameComponent>
-        &lt;/header>
-      &lt;/div>
-    );
+/** Turn management logic. Consumes next turn messages and manages currentTurn state*/
+class TurnContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {currentPlayer: 'Player 1'};
   }
+
+    render() {
+        return (&lt;div>
+            {this.props.children}
+            &lt;TurnStatusIndicator player={this.state.currentPlayer}>&lt;/TurnStatusIndicator>
+        &lt;/div>)
+      }
 }
 
-
-export default App;
-</code></pre>
+export default TurnContainer;</code></pre>
         </article>
     </section>
 

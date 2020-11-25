@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: App.js</title>
+    <title>JSDoc: Source: game/DiceWindow.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: App.js</h1>
+    <h1 class="page-title">Source: game/DiceWindow.js</h1>
 
     
 
@@ -26,30 +26,28 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
-import './App.css';
-import GameComponent from './game/GameComponent';
+            <pre class="prettyprint source linenums"><code>import { Component } from 'react';
+import SocketContext from './socket_context/context';
 
-/** Main React App component
- * @extends Component
- */
-class App extends Component {
 
-  /** Render the app */
-   render() {
-    return (
-      &lt;div className="App">
-        &lt;header className="App-header" data-testid="App-header">
-          &lt;GameComponent>&lt;/GameComponent>
-        &lt;/header>
-      &lt;/div>
-    );
+/** UI component to prompt the user to roll the dice and then show the result*/
+class DiceWindow extends Component {
+
+  static contextType = SocketContext;
+
+    render() {
+        return (
+        &lt;div bg-color="#bbbbbb" onClick={this.props.handleDiceClick}>lastRoll was a {this.context.rollResult}&lt;/div>
+        );
+      }
+
+      /* Called when dice are clicked */
+  handleDiceClick = () => {
+    this.props.handleDiceClick();
   }
 }
 
-
-export default App;
-</code></pre>
+export default DiceWindow;</code></pre>
         </article>
     </section>
 

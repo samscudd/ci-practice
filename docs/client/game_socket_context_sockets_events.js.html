@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: App.js</title>
+    <title>JSDoc: Source: game/socket_context/sockets/events.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: App.js</h1>
+    <h1 class="page-title">Source: game/socket_context/sockets/events.js</h1>
 
     
 
@@ -26,29 +26,33 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
-import './App.css';
-import GameComponent from './game/GameComponent';
+            <pre class="prettyprint source linenums"><code>import { socket } from './index';
 
-/** Main React App component
- * @extends Component
+/**
+ * 
+ * @classdesc listens to events emitted from server
  */
-class App extends Component {
+export const socketEvents = ({ setValue }) => {
+  socket.on('rollResult', (rollResult) => {
+    setValue(state => { return { ...state, rollResult }});
+  });
 
-  /** Render the app */
-   render() {
-    return (
-      &lt;div className="App">
-        &lt;header className="App-header" data-testid="App-header">
-          &lt;GameComponent>&lt;/GameComponent>
-        &lt;/header>
-      &lt;/div>
-    );
-  }
-}
+  socket.on('currentPlayer', ({ currentPlayer }) => {
+    setValue(state => { return { ...state, currentPlayer }});
+  });
 
+  socket.on('completedPlayer', ({ completedPlayer }) => {
+    setValue(state => { return { ...state, completedPlayer }});
+  });
 
-export default App;
+  socket.on('boardState', ({boardState}) => {
+    setValue(state => { return { ...state, boardState }});
+  });
+
+  socket.on('gameOver', ({gamOver}) => {
+    setValue(state => { return { ...state, gamOver }});
+  });
+};
 </code></pre>
         </article>
     </section>

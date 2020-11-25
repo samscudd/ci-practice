@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "node index.js",
-    "doc-server": "jsdoc -d docs/server --configure jsdoc.server.conf",
-    "doc-client": "jsdoc -d docs/client --configure jsdoc.client.conf",
+    "doc-server": "jsdoc -d ../docs/server --configure jsdoc.server.conf",
+    "doc-client": "jsdoc -d ../docs/client --configure jsdoc.client.conf",
     "heroku-postbuild": "cd trouble_client && npm install && npm run build"
   },
   "repository": {
@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/Baby-Zoomers/trouble_game#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "socket.io": "^3.0.3"
   },
   "devDependencies": {
     "jest": "^26.6.3",

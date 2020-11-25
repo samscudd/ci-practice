@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: App.js</title>
+    <title>JSDoc: Source: game/SpaceState.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: App.js</h1>
+    <h1 class="page-title">Source: game/SpaceState.js</h1>
 
     
 
@@ -26,30 +26,24 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
-import './App.css';
-import GameComponent from './game/GameComponent';
-
-/** Main React App component
- * @extends Component
+            <pre class="prettyprint source linenums"><code>/** Simple class for representing the state of a board space. 
+ * Used primarily by Board.js
  */
-class App extends Component {
-
-  /** Render the app */
-   render() {
-    return (
-      &lt;div className="App">
-        &lt;header className="App-header" data-testid="App-header">
-          &lt;GameComponent>&lt;/GameComponent>
-        &lt;/header>
-      &lt;/div>
-    );
-  }
+class SpaceState {
+    /**
+     * 
+     * @param {boolean} occupied True if space is occupied by a piece
+     * @param {string} color Color to render the occupied space
+     * @param {boolean} highlighted if the space is highlighted 
+     */
+    constructor(occupied, color, highlighted){
+        this.occupied = occupied;
+        this.color = color;
+        this.highlighted = highlighted;
+    }   
 }
 
-
-export default App;
-</code></pre>
+export default SpaceState;</code></pre>
         </article>
     </section>
 

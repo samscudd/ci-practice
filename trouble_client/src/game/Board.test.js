@@ -15,12 +15,16 @@ test('all spaces present', () => {
 });
 
 
-test('all spaces have an occupied, unoccupied, and suggestion ring', () => {
+test('all spaces have an occupied or unoccupied ring (not both)', () => {
   render(<Board />);
   for(var i = 0; i < 60; i++){
     const space = document.getElementById('space' + i.toString());
-    expect(space.getElementsByClassName('occupied_ring')).toBeTruthy();
-    expect(space.getElementsByClassName('unoccupied_ring')).toBeTruthy();
-    expect(space.getElementsByClassName('suggestion_ring')).toBeTruthy();
+    const occupied_ring = space.querySelector('.occupied_ring');
+    const unoccupied_ring = space.querySelector('.unoccupied_ring'); 
+
+    const o_ring_presesnt = !!occupied_ring;
+    const u_ring_presesnt = !!unoccupied_ring;
+    
+    expect((o_ring_presesnt && !u_ring_presesnt) || (u_ring_presesnt && ! o_ring_presesnt)).toBeTruthy()
   }
 });
