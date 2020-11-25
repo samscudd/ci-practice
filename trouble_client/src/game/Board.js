@@ -72,6 +72,9 @@ class Board extends Component {
     occupied: {r: 14.211, stroke: "#ffffff", strokeWidth: 16.579},
     highlight: {r: 19.134, stroke: "#ff9800", strokeWidth: 6.7323},
   }
+  textParams = {
+    lineHeight: 1.25
+  }
   
   /** Render an individual space
    * @param spaceNumber {int} space number to render
@@ -80,17 +83,18 @@ class Board extends Component {
   */
   renderSpace(spaceNumber, spaceState){
     const params = this.spaceParams[spaceNumber];
+    const id = "space" + spaceNumber.toString();
     let spaceBody;
     if (spaceState.occupied){
-      spaceBody = <circle class="occupied_ring" cx={params.cx} cy={params.cy} r={this.ringParams.occupied.r} stroke={spaceState.color} strokeWidth={this.ringParams.occupied.strokeWidth} />;
+      spaceBody = <circle className="occupied_ring" cx={params.cx} cy={params.cy} r={this.ringParams.occupied.r} stroke={spaceState.color} strokeWidth={this.ringParams.occupied.strokeWidth} />;
     } else {
-      spaceBody = <circle class="unoccupied_ring" cx={params.cx} cy={params.cy} r={this.ringParams.unoccupied.r}  stroke={this.ringParams.unoccupied.stroke} strokeWidth={this.ringParams.unoccupied.strokeWidth} />;
+      spaceBody = <circle className="unoccupied_ring" cx={params.cx} cy={params.cy} r={this.ringParams.unoccupied.r}  stroke={this.ringParams.unoccupied.stroke} strokeWidth={this.ringParams.unoccupied.strokeWidth} />;
     }
 
     return(
-      <g id={"space" + spaceNumber.toString()}>
+      <g id={id} key={id}>
         {spaceBody}
-        { spaceState.highlighted && <circle class="highlight_ring" cx={params.cx} cy={params.cy} r={this.ringParams.highlight.r} stroke={this.ringParams.highlight.stroke} strokeWidth={this.ringParams.highlight.strokeWidth}/> }
+        { spaceState.highlighted && <circle className="highlight_ring" cx={params.cx} cy={params.cy} r={this.ringParams.highlight.r} stroke={this.ringParams.highlight.stroke} strokeWidth={this.ringParams.highlight.strokeWidth}/> }
       </g>
     )
   }  
@@ -117,40 +121,40 @@ class Board extends Component {
       <circle id="use3758" transform="rotate(-90)" cx="-644.38" cy="596.42" r="30" fill="#eb5757" opacity=".998"/>
     </g>
     <g id="layer5" fill="#000000" fontFamily="sans-serif" fontSize="40px">
-      <text id="use3626" transform="rotate(45)" x="537.79474" y="424.8432" lineHeight="1.25" >
+      <text id="use3626" transform="rotate(45)" x="537.79474" y="424.8432" style={this.textParams} >
         <tspan id="tspan3634" x="537.79474" y="424.8432" fontSize="18.667px">Home</tspan>
       </text>
-      <text id="use3628" transform="rotate(135)" x="-26.732204" y="-141.04245" lineHeight="1.25" >
+      <text id="use3628" transform="rotate(135)" x="-26.732204" y="-141.04245" style={this.textParams} >
         <tspan id="tspan3638" x="-26.732204" y="-141.04245" fontSize="18.667px">Home</tspan>
       </text>
-      <text id="use3630" transform="rotate(225)" x="-592.61786" y="423.4845" lineHeight="1.25" >
+      <text id="use3630" transform="rotate(225)" x="-592.61786" y="423.4845" style={this.textParams} >
         <tspan id="tspan3642" x="-592.61786" y="423.4845" fontSize="18.667px">Home</tspan>
       </text>
-      <text id="use3632" transform="rotate(-45)" x="-28.09091" y="989.37012" lineHeight="1.25" >
+      <text id="use3632" transform="rotate(-45)" x="-28.09091" y="989.37012" style={this.textParams} >
         <tspan id="tspan3646" x="-28.09091" y="989.37012" fontSize="18.667px">Home</tspan>
       </text>
-      <text id="use3684" transform="rotate(45)" x="358.04095" y="52.590488" lineHeight="1.25" >
+      <text id="use3684" transform="rotate(45)" x="358.04095" y="52.590488" style={this.textParams} >
         <tspan id="tspan3692" x="358.04095" y="52.590488" fontSize="18.667px">Finish</tspan>
       </text>
-      <text id="use3686" transform="rotate(135)" x="-205.14441" y="-513.11621" lineHeight="1.25" >
+      <text id="use3686" transform="rotate(135)" x="-205.14441" y="-513.11621" style={this.textParams} >
         <tspan id="tspan3696" x="-205.14441" y="-513.11621" fontSize="18.667px">Finish</tspan>
       </text>
-      <text id="use3688" transform="rotate(225)" x="-770.85114" y="50.06913" lineHeight="1.25" >
+      <text id="use3688" transform="rotate(225)" x="-770.85114" y="50.06913" style={this.textParams} >
         <tspan id="tspan3700" x="-770.85114" y="50.06913" fontSize="18.667px">Finish</tspan>
       </text>
-      <text id="use3690" transform="rotate(-45)" x="-207.66577" y="615.77588" lineHeight="1.25" >
+      <text id="use3690" transform="rotate(-45)" x="-207.66577" y="615.77588" style={this.textParams} >
         <tspan id="tspan3704" x="-207.66577" y="615.77588" fontSize="18.667px">Finish</tspan>
       </text>
-      <text id="use3726" transform="rotate(45)" x="482.87833" y="279.75162" lineHeight="1.25" >
+      <text id="use3726" transform="rotate(45)" x="482.87833" y="279.75162" style={this.textParams} >
         <tspan id="tspan3734" x="482.87833" y="279.75162" fontSize="18.667px">Start</tspan>
       </text>
-      <text id="use3728" transform="rotate(135)" x="-79.140892" y="-284.98907" lineHeight="1.25" >
+      <text id="use3728" transform="rotate(135)" x="-79.140892" y="-284.98907" style={this.textParams} >
         <tspan id="tspan3738" x="-79.140892" y="-284.98907" fontSize="18.667px">Start</tspan>
       </text>
-      <text id="use3730" transform="rotate(225)" x="-644.03284" y="278.23462" lineHeight="1.25" >
+      <text id="use3730" transform="rotate(225)" x="-644.03284" y="278.23462" style={this.textParams} >
         <tspan id="tspan3742" x="-644.03284" y="278.23462" fontSize="18.667px">Start</tspan>
       </text>
-      <text id="use3732" transform="rotate(-45)" x="-76.263458" y="845.65198" lineHeight="1.25" >
+      <text id="use3732" transform="rotate(-45)" x="-76.263458" y="845.65198" style={this.textParams} >
         <tspan id="tspan3746" x="-76.263458" y="845.65198" fontSize="18.667px">Start</tspan>
       </text>
     </g>
